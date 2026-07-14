@@ -2,12 +2,13 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>IDEA Center Pro | نظام الإدارة المتكامل</title>
+    <title>IDEA Center Pro | الإدارة المتكاملة</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body { background: #f8f9fa; padding: 20px; font-family: sans-serif; }
-        .card { border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .card { border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .badge-count { background: #0d6efd; color: white; padding: 5px 15px; border-radius: 20px; }
     </style>
 </head>
 <body>
@@ -15,63 +16,55 @@
 <div class="container">
     <h2 class="text-center text-primary mb-4">نظام إدارة IDEA Center المتكامل</h2>
     
-    <!-- قسم الإحصائيات -->
-    <div class="card p-4">
-        <h4>إحصائيات المركز</h4>
-        <canvas id="myChart" height="80"></canvas>
+    <!-- الإحصائيات -->
+    <div class="row text-center">
+        <div class="col-md-6"><div class="card p-3">المعلمون: <span id="tCount" class="badge-count">0</span></div></div>
+        <div class="col-md-6"><div class="card p-3">الطلبة: <span id="sCount" class="badge-count">0</span></div></div>
     </div>
 
-    <!-- قسم المعلمين الجديد -->
+    <!-- قسم المعلمين -->
     <div class="card p-4">
         <h4>قسم المعلمين <button class="btn btn-success btn-sm" onclick="addTeacher()">إضافة معلم +</button></h4>
-        <table class="table table-bordered mt-3">
-            <thead><tr><th>اسم المعلم</th><th>المادة</th><th>حذف</th></tr></thead>
+        <table class="table table-striped mt-3">
+            <thead><tr><th>اسم المعلم</th><th>المادة</th><th>إجراء</th></tr></thead>
             <tbody id="teacherTable"></tbody>
         </table>
     </div>
 
-    <!-- قسم الطلبة المعدل (بإضافة الصف الدراسي) -->
+    <!-- قسم الطلبة -->
     <div class="card p-4">
-        <h4>سجل بيانات الطلبة <button class="btn btn-success btn-sm" onclick="addStudent()">إضافة طالب +</button></h4>
-        <table class="table table-bordered mt-3">
-            <thead><tr><th>الاسم</th><th>الصف الدراسي</th><th>موبايل الطالب</th><th>موبايل ولي الأمر</th><th>حذف</th></tr></thead>
+        <h4>سجل الطلبة <button class="btn btn-success btn-sm" onclick="addStudent()">إضافة طالب +</button></h4>
+        <table class="table table-striped mt-3">
+            <thead><tr><th>الاسم</th><th>الصف</th><th>موبايل الطالب</th><th>موبايل ولي الأمر</th><th>إجراء</th></tr></thead>
             <tbody id="studentTable"></tbody>
         </table>
-    </div>
-
-    <!-- قسم الحجز -->
-    <div class="card p-4">
-        <h4>نموذج حجز حصة</h4>
-        <form onsubmit="event.preventDefault(); alert('تم الحجز بنجاح!');">
-            <input type="text" class="form-control mb-2" placeholder="اسم الطالب" required>
-            <button type="submit" class="btn btn-primary">تأكيد الحجز</button>
-        </form>
     </div>
 </div>
 
 <script>
-    // الرسم البياني
-    new Chart(document.getElementById('myChart'), {
-        type: 'bar',
-        data: { labels: ['الطلبة', 'المعلمين', 'الحجوزات'], datasets: [{ label: 'العدد', data: [10, 5, 20], backgroundColor: '#0d6efd' }] }
-    });
+    function updateCounts() {
+        document.getElementById("tCount").textContent = document.getElementById("teacherTable").rows.length;
+        document.getElementById("sCount").textContent = document.getElementById("studentTable").rows.length;
+    }
 
-    // إضافة معلم
     function addTeacher() {
         let name = prompt("اسم المعلم:");
         let subject = prompt("المادة:");
         if (!name) return;
-        document.getElementById("teacherTable").innerHTML += `<tr><td>${name}</td><td>${subject}</td><td><button class="btn btn-danger btn-sm" onclick="this.parentElement.parentElement.remove()">حذف</button></td></tr>`;
+        document.getElementById("teacherTable").innerHTML += `<tr><td>${name}</td><td>${subject}</td><td><button class="btn btn-danger btn-sm" onclick="this.parentElement.parentElement.remove(); updateCounts();">حذف</button></td></tr>`;
+        updateCounts();
+        alert("تمت إضافة المعلم بنجاح!");
     }
 
-    // إضافة طالب (بإضافة الصف الدراسي)
     function addStudent() {
         let name = prompt("اسم الطالب:");
         let grade = prompt("الصف الدراسي:");
         let phone = prompt("رقم الطالب:");
         let pPhone = prompt("رقم ولي الأمر:");
         if (!name) return;
-        document.getElementById("studentTable").innerHTML += `<tr><td>${name}</td><td>${grade}</td><td>${phone}</td><td>${pPhone}</td><td><button class="btn btn-danger btn-sm" onclick="this.parentElement.parentElement.remove()">حذف</button></td></tr>`;
+        document.getElementById("studentTable").innerHTML += `<tr><td>${name}</td><td>${grade}</td><td>${phone}</td><td>${pPhone}</td><td><button class="btn btn-danger btn-sm" onclick="this.parentElement.parentElement.remove(); updateCounts();">حذف</button></td></tr>`;
+        updateCounts();
+        alert("تمت إضافة الطالب بنجاح!");
     }
 </script>
 
