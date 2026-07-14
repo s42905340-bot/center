@@ -1,40 +1,50 @@
-// وظيفة الإضافة
-function addItem(type) {
-    let name = prompt("Enter Name:");
-    if (!name) return;
-    let listId = type === 'teachers' ? 'teachersList' : 'studentsList';
-    renderItem(listId, name);
-    saveData();
-}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>IDEA Center Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f4f7f6; padding: 20px; }
+        .card { border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
+    </style>
+</head>
+<body>
 
-// وظيفة عرض العنصر مع أزرار التحكم
-function renderItem(listId, name) {
-    let ul = document.getElementById(listId);
-    let li = document.createElement("li");
-    li.className = "list-group-item d-flex justify-content-between align-items-center";
-    li.innerHTML = `<span>${name}</span> 
-    <div>
-        <button class="btn btn-sm btn-warning me-2" onclick="editItem(this)">Edit</button>
-        <button class="btn btn-sm btn-danger" onclick="this.parentElement.parentElement.remove(); saveData();">Delete</button>
-    </div>`;
-    ul.appendChild(li);
-}
+<div class="container">
+    <h2 class="text-primary mb-4">نظام إدارة IDEA Center</h2>
+    
+    <div class="card p-4">
+        <h4>المعلمون <button class="btn btn-success btn-sm" onclick="add('tList')">إضافة +</button></h4>
+        <ul id="tList" class="list-group mt-2"></ul>
+    </div>
 
-// وظيفة التعديل
-function editItem(btn) {
-    let span = btn.parentElement.parentElement.querySelector('span');
-    let newName = prompt("Edit Name:", span.textContent);
-    if (newName) span.textContent = newName;
-    saveData();
-}
+    <div class="card p-4">
+        <h4>الطلبة <button class="btn btn-success btn-sm" onclick="add('sList')">إضافة +</button></h4>
+        <ul id="sList" class="list-group mt-2"></ul>
+    </div>
+</div>
 
-// حفظ البيانات في المتصفح
-function saveData() {
-    localStorage.setItem("data", document.body.innerHTML);
-}
+<script>
+    function add(listId) {
+        let name = prompt("ادخل الاسم:");
+        if (!name) return;
+        let ul = document.getElementById(listId);
+        let li = document.createElement("li");
+        li.className = "list-group-item d-flex justify-content-between align-items-center";
+        li.innerHTML = `<span>${name}</span> 
+        <div>
+            <button class="btn btn-warning btn-sm" onclick="edit(this)">تعديل</button>
+            <button class="btn btn-danger btn-sm" onclick="this.parentElement.parentElement.remove()">حذف</button>
+        </div>`;
+        ul.appendChild(li);
+    }
+    function edit(btn) {
+        let span = btn.parentElement.parentElement.querySelector('span');
+        let n = prompt("تعديل الاسم:", span.textContent);
+        if (n) span.textContent = n;
+    }
+</script>
 
-// تحميل البيانات عند فتح الموقع
-window.onload = () => {
-    let saved = localStorage.getItem("data");
-    if (saved) document.body.innerHTML = saved;
-};
+</body>
+</html>
