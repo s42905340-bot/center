@@ -2,47 +2,70 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>IDEA Center Management</title>
+    <title>IDEA Center Management System</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body { background-color: #f4f7f6; padding: 20px; }
+        body { background-color: #f8f9fa; padding: 20px; font-family: sans-serif; }
         .card { border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2 class="text-primary mb-4">نظام إدارة IDEA Center</h2>
+    <h2 class="text-primary mb-4 text-center">نظام إدارة IDEA Center</h2>
     
     <div class="card p-4">
-        <h4>المعلمون <button class="btn btn-success btn-sm" onclick="add('tList')">إضافة +</button></h4>
+        <h4>المعلمون <button class="btn btn-success btn-sm" onclick="addItem('tList')">إضافة +</button></h4>
         <ul id="tList" class="list-group mt-2"></ul>
     </div>
 
     <div class="card p-4">
-        <h4>الطلبة <button class="btn btn-success btn-sm" onclick="add('sList')">إضافة +</button></h4>
+        <h4>الطلبة <button class="btn btn-success btn-sm" onclick="addItem('sList')">إضافة +</button></h4>
         <ul id="sList" class="list-group mt-2"></ul>
     </div>
 </div>
 
 <script>
-    function add(listId) {
-        let name = prompt("ادخل الاسم:");
+    // وظيفة الإضافة
+    function addItem(listId) {
+        let name = prompt("أدخل الاسم:");
         if (!name) return;
+        
         let ul = document.getElementById(listId);
         let li = document.createElement("li");
         li.className = "list-group-item d-flex justify-content-between align-items-center";
         li.innerHTML = `<span>${name}</span> 
         <div>
-            <button class="btn btn-warning btn-sm" onclick="edit(this)">تعديل</button>
-            <button class="btn btn-danger btn-sm" onclick="this.parentElement.parentElement.remove()">حذف</button>
+            <button class="btn btn-warning btn-sm" onclick="editItem(this)">تعديل</button>
+            <button class="btn btn-danger btn-sm" onclick="this.parentElement.parentElement.remove(); save();">حذف</button>
         </div>`;
         ul.appendChild(li);
+        save();
     }
-    function edit(btn) {
+
+    // وظيفة التعديل
+    function editItem(btn) {
         let span = btn.parentElement.parentElement.querySelector('span');
-        let n = prompt("تعديل الاسم:", span.textContent);
-        if (n) span.textContent = n;
+        let newName = prompt("تعديل الاسم:", span.textContent);
+        if (newName) {
+            span.textContent = newName;
+            save();
+        }
+    }
+
+    // وظيفة الحفظ التلقائي في المتصفح
+    function save() {
+        localStorage.setItem("ideaData", document.getElementById("tList").innerHTML + "|" + document.getElementById("sList").innerHTML);
+    }
+
+    // استرجاع البيانات عند فتح الصفحة
+    window.onload = function() {
+        let data = localStorage.getItem("ideaData");
+        if (data) {
+            let parts = data.split("|");
+            document.getElementById("tList").innerHTML = parts[0];
+            document.getElementById("sList").innerHTML = parts[1];
+        }
     }
 </script>
 
