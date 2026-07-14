@@ -1,0 +1,15 @@
+body { font-family: 'Segoe UI', sans-serif; background: #f4f4f9; padding: 15px; direction: rtl; }
+.card { background: white; padding: 20px; margin: 10px auto; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 800px; }
+input, select, button { width: 100%; padding: 12px; margin: 5px 0; border-radius: 8px; border: 1px solid #ccc; box-sizing: border-box; }
+button { background: #3498db; color: white; border: none; cursor: pointer; font-weight: bold; }
+button:hover { background: #2980b9; }
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+th, td { padding: 10px; border-bottom: 1px solid #ddd; text-align: center; }
+
+@media print {
+    body { background: white; }
+    .card { box-shadow: none; border: 1px solid #ddd; }
+    button, #loginPage, #newGroupInput, #searchInput { display: none; }
+    table { width: 100%; }
+}
+
