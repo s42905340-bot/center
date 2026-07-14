@@ -73,3 +73,30 @@ function changePassword() {
         alert("الرجاء إدخال كلمة مرور جديدة.");
     }
 }
+function addTeacher() {
+    let name = prompt("Enter Teacher Name:");
+    if(name) {
+        let li = document.createElement("li");
+        li.className = "list-group-item";
+        li.textContent = name;
+        document.getElementById("teachersList").appendChild(li);
+    }
+}
+
+function addStudent() {
+    let name = prompt("Enter Student Name:");
+    if(name) {
+        let li = document.createElement("li");
+        li.className = "list-group-item";
+        li.textContent = name;
+        document.getElementById("studentsList").appendChild(li);
+    }
+}
+// وظيفة حذف الطالب أو المدرس عند الضغط على اسمه
+document.addEventListener('click', function(e) {
+    if (e.target && e.target.classList.contains('list-group-item')) {
+        if (confirm("هل تريد حذف هذا الاسم؟")) {
+            e.target.remove();
+        }
+    }
+});

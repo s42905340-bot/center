@@ -4,38 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IDEA Center Dashboard</title>
+    <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="bg-light">
+<body>
 
 <div class="container py-5">
-    <h2 class="mb-4">IDEA Center System</h2>
+    <h2 class="mb-4 text-primary">💡 IDEA Center Management System</h2>
 
-    <!-- قسم المدرسين -->
+    <!-- الأزرار -->
     <div class="card p-4 mb-4">
-        <h4>Teachers <button class="btn btn-sm btn-success">+ Add Teacher</button></h4>
-        <p class="text-muted">No teachers added yet.</p>
+        <h4>Teachers <button class="btn btn-sm btn-success" onclick="addTeacher()">+ Add Teacher</button></h4>
+        <ul id="teachersList" class="list-group mt-2"></ul>
     </div>
 
-    <!-- قسم الطلبة -->
     <div class="card p-4 mb-4">
-        <h4>Students <button class="btn btn-sm btn-success">+ Add Student</button></h4>
-        <p class="text-muted">No students added yet.</p>
+        <h4>Students <button class="btn btn-sm btn-success" onclick="addStudent()">+ Add Student</button></h4>
+        <ul id="studentsList" class="list-group mt-2"></ul>
     </div>
 
-    <!-- قسم الصفوف الدراسية -->
+    <!-- القائمة المنسدلة -->
     <div class="card p-4">
         <h4>School Grades</h4>
-        <select class="form-select">
-            <option selected>Select Grade Level</option>
-            <option>Primary 1 - 6</option>
-            <option>Preparatory 1 - 3</option>
-            <option>Secondary 1 (First Year)</option>
+        <select class="form-select" id="gradeSelect">
+            <option>Primary 1-6</option>
+            <option>Preparatory 1-3</option>
+            <option>Secondary 1</option>
             <option>Secondary 2</option>
-            <option>Secondary 3 (Baccalaureate)</option>
+            <option>Secondary 3</option>
         </select>
     </div>
 </div>
 
+<script src="script.js"></script>
 </body>
 </html>
