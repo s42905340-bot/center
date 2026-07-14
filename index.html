@@ -14,6 +14,21 @@
         <input type="password" id="passInput" placeholder="كلمة المرور (1234)">
         <button onclick="checkLogin()">دخول</button>
     </div>
+    <div class="card">
+    <h3>تغيير كلمة المرور</h3>
+    <input type="password" id="newPass" placeholder="كلمة المرور الجديدة">
+    <button onclick="changePassword()">حفظ الباسورد الجديد</button>
+</div>
+
+<script>
+    function changePassword() {
+        let newPass = document.getElementById('newPass').value;
+        if(newPass) {
+            localStorage.setItem('myCenterPass', newPass);
+            alert("تم تغيير كلمة المرور بنجاح! سيتم استخدامها في المرة القادمة.");
+        }
+    }
+</script>
 
     <div id="mainContent" style="display: none;">
         <div class="card">
@@ -32,6 +47,11 @@
             <button onclick="addGroup()">إضافة مجموعة</button>
             
             <hr>
+            <div class="card">
+    <h3>إعدادات الأمان</h3>
+    <input type="password" id="newPassInput" placeholder="كلمة المرور الجديدة">
+    <button onclick="changePassword()">حفظ الباسورد الجديد</button>
+</div>
             
             <h2>إضافة طالب جديد</h2>
             <input type="text" id="studentName" placeholder="اسم الطالب">

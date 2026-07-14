@@ -8,11 +8,15 @@ let myChart = new Chart(ctx, {
 });
 
 function checkLogin() {
-    if(document.getElementById('passInput').value === "1234") {
-        document.getElementById('loginPage').style.display = "none";
-        document.getElementById('mainContent').style.display = "block";
-        updateSystem();
-    } else { alert("كلمة مرور خطأ"); }
+    let inputPass = document.getElementById('passInput').value;
+    let savedPass = localStorage.getItem('myCenterPass') || "1234";
+
+    if (inputPass === savedPass) {
+        document.getElementById('loginPage').style.display = 'none';
+        document.getElementById('mainContent').style.display = 'block';
+    } else {
+        alert("كلمة المرور خطأ!");
+    }
 }
 
 function addGroup() {
@@ -57,4 +61,15 @@ function searchStudent() {
     document.querySelectorAll('#studentTable tbody tr').forEach(row => {
         row.style.display = row.cells[0].innerText.toLowerCase().includes(query) ? "" : "none";
     });
+}
+
+function changePassword() {
+    let newPass = document.getElementById('newPassInput').value;
+    if (newPass) {
+        localStorage.setItem('myCenterPass', newPass);
+        alert("تم تغيير كلمة المرور بنجاح!");
+        document.getElementById('newPassInput').value = "";
+    } else {
+        alert("الرجاء إدخال كلمة مرور جديدة.");
+    }
 }
