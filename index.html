@@ -2,25 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>IDEA Center</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IDEA Center Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="p-4">
+<body class="bg-light">
 
-    <h1 class="text-primary">IDEA Educational Center</h1>
-    <hr>
-    
-    <h3>Teachers</h3>
-    <p>List: Mr. Nader, Mr. Ahmed</p>
+<div class="container py-5">
+    <h2 class="mb-4">IDEA Center System</h2>
 
-    <h3>Students</h3>
-    <p>List: Donia Mahmoud, Malak, Mai, Menna, Hhour</p>
+    <!-- قسم المدرسين -->
+    <div class="card p-4 mb-4">
+        <h4>Teachers <button class="btn btn-sm btn-success">+ Add Teacher</button></h4>
+        <p class="text-muted">No teachers added yet.</p>
+    </div>
 
-    <h3>Groups</h3>
-    <p>List: Computer Science, Architecture</p>
+    <!-- قسم الطلبة -->
+    <div class="card p-4 mb-4">
+        <h4>Students <button class="btn btn-sm btn-success">+ Add Student</button></h4>
+        <p class="text-muted">No students added yet.</p>
+    </div>
 
-    <h3>Booking</h3>
-    <button class="btn btn-success">Book Now</button>
+    <!-- قسم الصفوف الدراسية -->
+    <div class="card p-4">
+        <h4>School Grades</h4>
+        <select class="form-select">
+            <option selected>Select Grade Level</option>
+            <option>Primary 1 - 6</option>
+            <option>Preparatory 1 - 3</option>
+            <option>Secondary 1 (First Year)</option>
+            <option>Secondary 2</option>
+            <option>Secondary 3 (Baccalaureate)</option>
+        </select>
+    </div>
+</div>
 
 </body>
 </html>
