@@ -100,3 +100,43 @@ document.addEventListener('click', function(e) {
         }
     }
 });
+// وظيفة الإضافة
+function addItem(type) {
+    let name = prompt("Enter Name:");
+    if (!name) return;
+    let listId = type === 'teachers' ? 'teachersList' : 'studentsList';
+    renderItem(listId, name);
+    saveData();
+}
+
+// وظيفة عرض العنصر مع أزرار التحكم
+function renderItem(listId, name) {
+    let ul = document.getElementById(listId);
+    let li = document.createElement("li");
+    li.className = "list-group-item d-flex justify-content-between align-items-center";
+    li.innerHTML = `<span>${name}</span> 
+    <div>
+        <button class="btn btn-sm btn-warning me-2" onclick="editItem(this)">Edit</button>
+        <button class="btn btn-sm btn-danger" onclick="this.parentElement.parentElement.remove(); saveData();">Delete</button>
+    </div>`;
+    ul.appendChild(li);
+}
+
+// وظيفة التعديل
+function editItem(btn) {
+    let span = btn.parentElement.parentElement.querySelector('span');
+    let newName = prompt("Edit Name:", span.textContent);
+    if (newName) span.textContent = newName;
+    saveData();
+}
+
+// حفظ البيانات في المتصفح
+function saveData() {
+    localStorage.setItem("data", document.body.innerHTML);
+}
+
+// تحميل البيانات عند فتح الموقع
+window.onload = () => {
+    let saved = localStorage.getItem("data");
+    if (saved) document.body.innerHTML = saved;
+};

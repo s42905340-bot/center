@@ -16,4 +16,7 @@ th, td { padding: 10px; border-bottom: 1px solid #ddd; text-align: center; }
 .btn-success { transition: 0.3s; }
 .btn-success:hover { transform: scale(1.05); }
 h2 { font-weight: bold; }
+.card { border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+.list-group-item { border: none; border-bottom: 1px solid #eee; }
+.btn { transition: 0.3s; }
 
